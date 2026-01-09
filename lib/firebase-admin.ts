@@ -6,30 +6,50 @@ import fs from "fs";
 
 // Initialize Firebase Admin SDK
 if (getApps().length === 0) {
-  const serviceAccountPath = process.env.FIREBASE_ADMIN_SDK_PATH || "./one-plus-6a6b5-firebase-adminsdk-fbsvc-92939dbc84.json";
-  const fullPath = path.resolve(process.cwd(), serviceAccountPath);
-  
-  try {
+  let serviceAccount;
+
+  if (process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
+    // Production/Netlify: Use environment variable
+    try {
+      serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
+      console.log("Using Firebase Admin SDK from environment variable");
+    } catch (error) {
+      console.error("Failed to parse FIREBASE_SERVICE_ACCOUNT_KEY:", error);
+      throw new Error("Invalid FIREBASE_SERVICE_ACCOUNT_KEY environment variable");
+    }
+  } else {
+    // Local: Use file
+    const serviceAccountPath = process.env.FIREBASE_ADMIN_SDK_PATH || "./one-plus-6a6b5-firebase-adminsdk-fbsvc-92939dbc84.json";
+    const fullPath = path.resolve(process.cwd(), serviceAccountPath);
+
     if (fs.existsSync(fullPath)) {
-      // Read and parse the service account JSON file
-      const serviceAccountJson = fs.readFileSync(fullPath, "utf8");
-      const serviceAccount = JSON.parse(serviceAccountJson);
-      
+      try {
+        const serviceAccountJson = fs.readFileSync(fullPath, "utf8");
+        serviceAccount = JSON.parse(serviceAccountJson);
+        console.log("Using Firebase Admin SDK from local file");
+      } catch (error: any) {
+        console.error("Failed to read/parse local service account file:", error);
+        throw error;
+      }
+    } else {
+      console.error(`Firebase Admin SDK file not found at: ${fullPath} and FIREBASE_SERVICE_ACCOUNT_KEY not set.`);
+      // In build environment if we don't need DB access strictly (e.g. linting), we might not want to crash, 
+      // but typically we do need it for getStaticProps/migration. 
+      // We will throw to be safe and ensure correct setup.
+      throw new Error("Missing Firebase credentials. Set FIREBASE_SERVICE_ACCOUNT_KEY or ensure file exists.");
+    }
+  }
+
+  if (serviceAccount) {
+    try {
       initializeApp({
         credential: cert(serviceAccount),
       });
       console.log("Firebase Admin SDK initialized successfully");
-    } else {
-      const errorMsg = `Firebase Admin SDK file not found at: ${fullPath}`;
-      console.error(errorMsg);
-      throw new Error(errorMsg);
+    } catch (error: any) {
+      console.error("Failed to initialize Firebase Admin SDK with credentials:", error);
+      throw error;
     }
-  } catch (error: any) {
-    console.error("Failed to initialize Firebase Admin SDK:", error.message);
-    console.error("Full error:", error);
-    console.error("Please ensure the Firebase Admin SDK JSON file exists at:", fullPath);
-    // Re-throw to prevent app from starting with broken admin functionality
-    throw error;
   }
 }
 
