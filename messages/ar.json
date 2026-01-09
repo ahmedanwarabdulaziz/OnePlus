@@ -1,0 +1,54 @@
+{
+  "common": {
+    "welcome": "مرحباً",
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "contact": "اتصل بنا",
+    "courses": "الدورات",
+    "staff": "الفريق",
+    "readMore": "اقرأ المزيد",
+    "learnMore": "اعرف المزيد",
+    "loading": "جاري التحميل..."
+  },
+  "home": {
+    "title": "برامج التدريب والتطوير المهنية",
+    "subtitle": "تمكين الأفراد والمنظمات من خلال برامج التدريب الشاملة والاستشارات المتخصصة",
+    "explorePrograms": "استكشف برامجنا",
+    "whatWeOffer": "ما نقدمه",
+    "trainingPrograms": "برامج التدريب",
+    "trainingProgramsDesc": "دورات شاملة مصممة لتعزيز المهارات والمعرفة",
+    "developmentWorkshops": "ورش التطوير",
+    "developmentWorkshopsDesc": "ورش تفاعلية للنمو المهني والشخصي",
+    "expertConsultations": "الاستشارات المتخصصة",
+    "expertConsultationsDesc": "استشارات فردية مع خبراء الصناعة"
+  },
+  "courses": {
+    "title": "دوراتنا",
+    "noCourses": "لا توجد دورات متاحة",
+    "viewDetails": "عرض التفاصيل"
+  },
+  "staff": {
+    "title": "فريقنا",
+    "subtitle": "تعرف على فريقنا المتميز من الخبراء والمحترفين",
+    "coaches": "المدربون",
+    "employees": "الموظفون",
+    "all": "الكل",
+    "viewProfile": "عرض الملف الشخصي",
+    "noStaff": "لا يوجد أعضاء فريق متاحين حالياً",
+    "notFound": "عضو الفريق غير موجود",
+    "backToStaff": "← العودة إلى الفريق",
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني",
+    "website": "الموقع",
+    "biography": "نبذة",
+    "experience": "الخبرة",
+    "specialties": "التخصصات",
+    "certifications": "الشهادات",
+    "education": "التعليم",
+    "achievements": "الإنجازات",
+    "areasOfExpertise": "مجالات الخبرة",
+    "languages": "اللغات"
+  }
+}

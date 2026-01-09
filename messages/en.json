@@ -1,0 +1,54 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "login": "Login",
+    "logout": "Logout",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "courses": "Courses",
+    "staff": "Staff",
+    "readMore": "Read More",
+    "learnMore": "Learn More",
+    "loading": "Loading..."
+  },
+  "home": {
+    "title": "Professional Training & Development Programs",
+    "subtitle": "Empowering individuals and organizations through comprehensive training programs and expert consultations",
+    "explorePrograms": "Explore Our Programs",
+    "whatWeOffer": "What We Offer",
+    "trainingPrograms": "Training Programs",
+    "trainingProgramsDesc": "Comprehensive courses designed to enhance skills and knowledge",
+    "developmentWorkshops": "Development Workshops",
+    "developmentWorkshopsDesc": "Interactive workshops for professional and personal growth",
+    "expertConsultations": "Expert Consultations",
+    "expertConsultationsDesc": "One-on-one consultations with industry experts"
+  },
+  "courses": {
+    "title": "Our Courses",
+    "noCourses": "No courses available",
+    "viewDetails": "View Details"
+  },
+  "staff": {
+    "title": "Our Team",
+    "subtitle": "Meet our exceptional team of experts and professionals",
+    "coaches": "Coaches",
+    "employees": "Employees",
+    "all": "All",
+    "viewProfile": "View Profile",
+    "noStaff": "No staff members available at the moment",
+    "notFound": "Staff member not found",
+    "backToStaff": "← Back to Staff",
+    "phone": "Phone",
+    "email": "Email",
+    "website": "Website",
+    "biography": "Biography",
+    "experience": "Experience",
+    "specialties": "Specialties",
+    "certifications": "Certifications",
+    "education": "Education",
+    "achievements": "Achievements",
+    "areasOfExpertise": "Areas of Expertise",
+    "languages": "Languages"
+  }
+}

@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Admin Users Collection
+    // All access is handled server-side via API routes (using Admin SDK)
+    // Client-side access is denied for security
+    match /adminUsers/{userId} {
+      allow read, write: if false;
+    }
+    
+    // Courses Collection (for future use)
+    match /courses/{courseId} {
+      // Public read access
+      allow read: if true;
+      
+      // Only admins can write (will be enforced server-side)
+      allow write: if false;
+    }
+    
+    // Default: deny all other access
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
