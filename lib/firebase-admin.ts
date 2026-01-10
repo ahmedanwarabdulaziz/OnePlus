@@ -58,24 +58,23 @@ try {
 
 // Mock DB for retrieval during build time (if keys are missing)
 const createMockDb = () => {
+  const mockCollection = {
+    where: () => mockCollection,
+    orderBy: () => mockCollection,
+    limit: () => mockCollection,
+    get: async () => ({ docs: [], empty: true, forEach: () => { } }),
+    doc: (_id?: string) => ({
+      get: async () => ({ exists: false, data: () => undefined }),
+      set: async () => { },
+      update: async () => { },
+      delete: async () => { },
+      collection: () => mockCollection
+    }),
+    add: async () => ({ id: 'mock-id' }),
+  };
   return {
-    collection: (_name: string) => ({
-      where: () => ({
-        get: async () => ({ docs: [] })
-      }),
-      orderBy: () => ({
-        get: async () => ({ docs: [] })
-      }),
-      doc: (_id: string) => ({
-        get: async () => ({ exists: false, data: () => undefined }),
-        set: async () => { },
-        update: async () => { },
-        delete: async () => { }
-      }),
-      get: async () => ({ docs: [] }),
-      add: async () => ({ id: 'mock-id' }),
-    })
-  } as any; // Cast to any to bypass strict type checks for the mock
+    collection: (_name: string) => mockCollection
+  } as any;
 };
 
 let adminDb: ReturnType<typeof getFirestore> = undefined as any;
