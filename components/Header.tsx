@@ -88,6 +88,15 @@ export default function Header() {
             >
               {t("courses.title") || t("common.courses") || "Courses"}
             </Link>
+            <Link
+              href={getLocalizedPath("/branches", locale)}
+              className={`transition-colors ${pathname?.includes("/branches")
+                ? "text-[#0f1b4b] font-semibold"
+                : "text-gray-700 hover:text-[#0f1b4b]"
+                }`}
+            >
+              {t("branches.title") || "Tracks"}
+            </Link>
             <div
               className="relative"
               onMouseEnter={handleMouseEnter}

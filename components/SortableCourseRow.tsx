@@ -9,12 +9,14 @@ import { getText } from "@/types/translations";
 
 interface SortableCourseRowProps {
     course: Course;
+    branchNames?: string[];
     onEdit: (course: Course) => void;
     onDelete: (id: string) => void;
 }
 
 export default function SortableCourseRow({
     course,
+    branchNames,
     onEdit,
     onDelete,
 }: SortableCourseRowProps) {
@@ -60,6 +62,24 @@ export default function SortableCourseRow({
                         />
                     ))}
                 </Box>
+            </TableCell>
+            <TableCell>
+                {branchNames && branchNames.length > 0 ? (
+                    <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
+                        {branchNames.map((name, idx) => (
+                            <Chip
+                                key={idx}
+                                label={name}
+                                size="small"
+                                sx={{ bgcolor: "#e3f2fd", color: "#0d47a1", fontWeight: "bold" }}
+                            />
+                        ))}
+                    </Box>
+                ) : (
+                    <Typography variant="caption" color="text.secondary">
+                        -
+                    </Typography>
+                )}
             </TableCell>
             <TableCell>
                 <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>

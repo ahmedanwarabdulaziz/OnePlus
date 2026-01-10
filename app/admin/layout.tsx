@@ -22,6 +22,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import GroupsIcon from "@mui/icons-material/Groups";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
+import CategoryIcon from "@mui/icons-material/Category";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
@@ -61,6 +62,7 @@ export default function AdminLayout({
     { text: "Users", icon: <PeopleIcon />, href: "/admin/users" },
     { text: "Staff", icon: <GroupsIcon />, href: "/admin/staff" },
     { text: "Courses", icon: <LibraryBooksIcon />, href: "/admin/courses" },
+    { text: "Branches", icon: <CategoryIcon />, href: "/admin/branches" },
   ];
 
   const drawer = (

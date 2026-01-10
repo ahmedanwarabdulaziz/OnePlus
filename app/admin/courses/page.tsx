@@ -25,6 +25,7 @@ import {
     TableContainer,
     TableHead,
     TableRow,
+    Chip,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import {
@@ -43,6 +44,7 @@ import {
     verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { Course, CourseInput, CourseAudience } from "@/types/courses";
+import { Branch } from "@/types/branches";
 import { createTranslatedText, TranslatedText } from "@/types/translations";
 import BilingualInput from "@/components/BilingualInput";
 import BilingualArrayTable from "@/components/BilingualArrayTable";
@@ -52,11 +54,14 @@ import ImageUpload from "@/components/ImageUpload";
 
 export default function CoursesPage() {
     const [courses, setCourses] = useState<Course[]>([]);
+    const [branches, setBranches] = useState<Branch[]>([]);
     const [loading, setLoading] = useState(true);
     const [openDialog, setOpenDialog] = useState(false);
     const [editingCourse, setEditingCourse] = useState<Course | null>(null);
 
     const initialForm: CourseInput = {
+        slug: "",
+        branchIds: [],
         title: createTranslatedText("", ""),
         shortDescription: createTranslatedText("", ""),
         fullDescription: createTranslatedText("", ""),
@@ -69,6 +74,8 @@ export default function CoursesPage() {
         learningOutcomes: [],
         images: {},
         isActive: true,
+        isFeatured: false,
+        displayOrder: 0,
     };
 
     const [formData, setFormData] = useState<CourseInput>(initialForm);
@@ -83,24 +90,42 @@ export default function CoursesPage() {
     );
 
     useEffect(() => {
-        fetchCourses();
+        fetchData();
     }, []);
+
+    const fetchData = async () => {
+        try {
+            setLoading(true);
+            const [coursesRes, branchesRes] = await Promise.all([
+                fetch("/api/admin/courses"),
+                fetch("/api/admin/branches")
+            ]);
+
+            if (coursesRes.ok) {
+                const data = await coursesRes.json();
+                setCourses(data.courses || []);
+            }
+            if (branchesRes.ok) {
+                const data = await branchesRes.json();
+                setBranches(data.branches || []);
+            }
+        } catch (err) {
+            setError("Error loading data");
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const fetchCourses = async () => {
         try {
-            setLoading(true);
             const response = await fetch("/api/admin/courses");
             if (response.ok) {
                 const data = await response.json();
                 setCourses(data.courses || []);
-            } else {
-                setError("Failed to fetch courses");
             }
         } catch (err) {
-            setError("Error loading courses");
             console.error(err);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -115,6 +140,8 @@ export default function CoursesPage() {
                 (arr || []).map(item => ensureTranslated(item));
 
             setFormData({
+                slug: course.slug || "",
+                branchIds: course.branchIds || ((course as any).branchId ? [(course as any).branchId] : []),
                 title: ensureTranslated(course.title),
                 shortDescription: ensureTranslated(course.shortDescription),
                 fullDescription: ensureTranslated(course.fullDescription),
@@ -129,6 +156,7 @@ export default function CoursesPage() {
                 learningOutcomes: ensureArray(course.learningOutcomes || []),
                 images: course.images || {},
                 isActive: course.isActive,
+                isFeatured: course.isFeatured,
                 displayOrder: course.displayOrder,
             });
         } else {
@@ -161,10 +189,16 @@ export default function CoursesPage() {
                 : "/api/admin/courses";
             const method = editingCourse ? "PUT" : "POST";
 
+            // Auto-generate slug if missing
+            const payload = { ...formData };
+            if (!payload.slug && payload.title.en) {
+                payload.slug = payload.title.en.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+            }
+
             const response = await fetch(url, {
                 method,
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(payload),
             });
 
             const data = await response.json();
@@ -281,6 +315,7 @@ export default function CoursesPage() {
                             <TableRow>
                                 <TableCell width={50}></TableCell>
                                 <TableCell>Course Title</TableCell>
+                                <TableCell>Branch</TableCell>
                                 <TableCell>Audience</TableCell>
                                 <TableCell>Levels</TableCell>
                                 <TableCell>Status</TableCell>
@@ -290,7 +325,7 @@ export default function CoursesPage() {
                         <TableBody>
                             {courses.length === 0 ? (
                                 <TableRow>
-                                    <TableCell colSpan={6} align="center">
+                                    <TableCell colSpan={7} align="center">
                                         No courses found
                                     </TableCell>
                                 </TableRow>
@@ -299,14 +334,23 @@ export default function CoursesPage() {
                                     items={courses.map((c) => c.id)}
                                     strategy={verticalListSortingStrategy}
                                 >
-                                    {courses.map((course) => (
-                                        <SortableCourseRow
-                                            key={course.id}
-                                            course={course}
-                                            onEdit={handleOpenDialog}
-                                            onDelete={handleDelete}
-                                        />
-                                    ))}
+                                    {courses.map((course) => {
+                                        // Find branch names
+                                        const courseBranchIds = course.branchIds || ((course as any).branchId ? [(course as any).branchId] : []);
+                                        const branchNames = courseBranchIds
+                                            .map(id => branches.find(b => b.id === id)?.name?.en)
+                                            .filter(Boolean) as string[];
+
+                                        return (
+                                            <SortableCourseRow
+                                                key={course.id}
+                                                course={course}
+                                                branchNames={branchNames}
+                                                onEdit={handleOpenDialog}
+                                                onDelete={handleDelete}
+                                            />
+                                        );
+                                    })}
                                 </SortableContext>
                             )}
                         </TableBody>
@@ -333,6 +377,41 @@ export default function CoursesPage() {
                                         required
                                     />
                                 </Grid>
+
+                                <Grid item xs={12} md={4}>
+                                    <FormControl fullWidth>
+                                        <InputLabel>Branch / Track</InputLabel>
+                                        <Select
+                                            multiple
+                                            value={formData.branchIds || []}
+                                            label="Branch / Track"
+                                            onChange={(e) => {
+                                                const value = e.target.value;
+                                                setFormData({
+                                                    ...formData,
+                                                    branchIds: typeof value === 'string' ? value.split(',') : value as string[]
+                                                });
+                                            }}
+                                            renderValue={(selected) => (
+                                                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                                                    {(selected as string[]).map((value) => {
+                                                        const branch = branches.find(b => b.id === value);
+                                                        return (
+                                                            <Chip key={value} label={branch?.name?.en} size="small" />
+                                                        );
+                                                    })}
+                                                </Box>
+                                            )}
+                                        >
+                                            {branches.map(branch => (
+                                                <MenuItem key={branch.id} value={branch.id}>
+                                                    {branch.name.en}
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                </Grid>
+
                                 <Grid item xs={12} md={4}>
                                     <FormControl fullWidth>
                                         <InputLabel>Target Audience</InputLabel>
@@ -375,12 +454,33 @@ export default function CoursesPage() {
                                         }
                                         label="Active (Visible on Website)"
                                     />
+                                    <FormControlLabel
+                                        control={
+                                            <Switch
+                                                checked={!!formData.isFeatured}
+                                                onChange={(e) => setFormData({ ...formData, isFeatured: e.target.checked })}
+                                                color="warning"
+                                            />
+                                        }
+                                        label="Featured (Highlighted)"
+                                    />
                                 </Grid>
                             </Grid>
 
                             {/* Description */}
                             <Typography variant="h6" color="primary">Description</Typography>
                             <Grid container spacing={2}>
+                                <Grid item xs={12} md={6}>
+                                    <Box>
+                                        <Typography variant="caption" color="textSecondary">Slug (URL)</Typography>
+                                        <input
+                                            value={formData.slug}
+                                            onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                                            className="w-full p-2 border rounded"
+                                            placeholder="auto-generated-if-empty"
+                                        />
+                                    </Box>
+                                </Grid>
                                 <Grid item xs={12}>
                                     <BilingualInput
                                         label="Short Description (Card Summary)"
@@ -486,6 +586,7 @@ export default function CoursesPage() {
                     </DialogActions>
                 </form>
             </Dialog>
-        </div>
+        </div >
     );
 }
+

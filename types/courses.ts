@@ -24,6 +24,7 @@ export interface CourseImages {
 export interface Course {
     id: string;
     slug: string;
+    branchIds?: string[]; // Link to multiple Branches
     title: TranslatedText;
     shortDescription: TranslatedText; // For cards
     fullDescription: TranslatedText;  // For details page
@@ -44,6 +45,7 @@ export interface Course {
     images?: CourseImages;
 
     isActive: boolean;
+    isFeatured?: boolean;
     displayOrder: number;
 
     createdAt: Date;
@@ -53,6 +55,8 @@ export interface Course {
 
 // Input Type for Forms
 export interface CourseInput {
+    slug: string;
+    branchIds?: string[]; // Link to multiple Branches
     title: TranslatedText;
     shortDescription: TranslatedText;
     fullDescription: TranslatedText;
@@ -65,5 +69,6 @@ export interface CourseInput {
     learningOutcomes?: TranslatedText[];
     images?: CourseImages;
     isActive: boolean;
+    isFeatured?: boolean;
     displayOrder?: number;
 }

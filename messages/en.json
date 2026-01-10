@@ -29,6 +29,13 @@
     "noCourses": "No courses available",
     "viewDetails": "View Details"
   },
+  "branches": {
+    "title": "Our Tracks",
+    "subtitle": "Explore our specialized training paths designed to help you master specific skills and advance your career.",
+    "homeSubtitle": "Choose your path to success with our focused training tracks.",
+    "backToTracks": "Back to Tracks",
+    "noBranches": "No training tracks found."
+  },
   "staff": {
     "title": "Our Team",
     "subtitle": "Meet our exceptional team of experts and professionals",

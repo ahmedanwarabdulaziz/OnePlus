@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import ImageIcon from "@mui/icons-material/Image";
+import Image from "next/image";
 
 interface ImageUploadProps {
   label: string;
@@ -66,16 +67,16 @@ export default function ImageUpload({
       if (response.ok) {
         // Use presignedUrl if available (for immediate access), otherwise use url or key
         const imageUrl = data.presignedUrl || data.url || data.key;
-        console.log("Upload response:", { 
-          presignedUrl: !!data.presignedUrl, 
-          url: !!data.url, 
+        console.log("Upload response:", {
+          presignedUrl: !!data.presignedUrl,
+          url: !!data.url,
           key: !!data.key,
           imageUrl: imageUrl?.substring(0, 50) + "..."
         });
         onChange(imageUrl);
       } else {
-        const errorMsg = data.details 
-          ? `${data.error}: ${data.details}` 
+        const errorMsg = data.details
+          ? `${data.error}: ${data.details}`
           : data.error || "Failed to upload image";
         setError(errorMsg);
         console.error("Upload error:", data);
@@ -108,27 +109,26 @@ export default function ImageUpload({
             }}
           >
             {value ? (
-              <img
-                src={value}
-                alt={label}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-                onError={(e) => {
-                  console.error("Image load error:", {
-                    url: value,
-                    urlLength: value?.length,
-                    urlStart: value?.substring(0, 50),
-                  });
-                  setError(`Failed to load image preview`);
-                }}
-                onLoad={() => {
-                  console.log("Image loaded successfully:", value?.substring(0, 50));
-                  setError(""); // Clear any previous errors on successful load
-                }}
-              />
+              <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                <Image
+                  src={value}
+                  alt={label}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  onError={(e) => {
+                    console.error("Image load error:", {
+                      url: value,
+                      urlLength: value?.length,
+                      urlStart: value?.substring(0, 50),
+                    });
+                    setError(`Failed to load image preview`);
+                  }}
+                  onLoad={() => {
+                    console.log("Image loaded successfully:", value?.substring(0, 50));
+                    setError("");
+                  }}
+                />
+              </div>
             ) : (
               <ImageIcon sx={{ color: "grey.400" }} />
             )}

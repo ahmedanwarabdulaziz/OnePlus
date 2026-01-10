@@ -6,6 +6,8 @@ const withNextIntl = createNextIntlPlugin("./i18n/config.ts");
 const nextConfig = {
   reactStrictMode: true,
   images: {
+    minimumCacheTTL: 31536000,
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: "https",
@@ -15,6 +17,14 @@ const nextConfig = {
         protocol: "https",
         hostname: "*.cloudflarestorage.com",
       },
+      {
+        protocol: "https",
+        hostname: "firebasestorage.googleapis.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      }
     ],
   },
 };

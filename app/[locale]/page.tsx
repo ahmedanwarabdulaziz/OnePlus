@@ -2,6 +2,87 @@
 
 import { useTranslations } from "next-intl";
 import Header from "@/components/Header";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Branch } from "@/types/branches";
+import { getText } from "@/types/translations";
+import { useLocale } from "@/hooks/useLocale";
+import { getLocalizedPath } from "@/lib/localized-path";
+import Image from "next/image";
+
+function TracksSection() {
+  const t = useTranslations();
+  const locale = useLocale();
+  const [branches, setBranches] = useState<Branch[]>([]);
+
+  useEffect(() => {
+    const fetchBranches = async () => {
+      try {
+        const response = await fetch("/api/branches");
+        const data = await response.json();
+        if (data.success) {
+          setBranches(data.branches || []);
+        }
+      } catch (error) {
+        console.error("Error fetching branches:", error);
+      }
+    };
+    fetchBranches();
+  }, []);
+
+  if (branches.length === 0) return null;
+
+  return (
+    <section className="py-16 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-3xl font-bold text-center text-[#0f1b4b] mb-4">
+          {t("branches.title") || "Specialized Tracks"}
+        </h2>
+        <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
+          {t("branches.homeSubtitle") || "Choose your path to success with our focused training tracks."}
+        </p>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {branches.slice(0, 4).map((branch) => (
+            <Link
+              key={branch.id}
+              href={getLocalizedPath(`/branches/${branch.slug}`, locale)}
+              className="group bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 hover:-translate-y-1"
+            >
+              <div className="h-32 relative bg-gray-200">
+                {branch.image ? (
+                  <Image src={branch.image} alt={getText(branch.name, locale)} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                ) : (
+                  <div className="absolute inset-0 bg-[#0f1b4b]/10 flex items-center justify-center">
+                    <span className="text-4xl text-[#0f1b4b]/20 font-bold">{getText(branch.name, locale)[0]}</span>
+                  </div>
+                )}
+                <div className="absolute bottom-0 left-0 w-full h-1" style={{ backgroundColor: branch.color || '#0f1b4b' }} />
+              </div>
+              <div className="p-4">
+                <h3 className="font-bold text-[#0f1b4b] mb-1 group-hover:text-[#701621] transition-colors">
+                  {getText(branch.name, locale)}
+                </h3>
+                <p className="text-xs text-gray-500 line-clamp-2">
+                  {getText(branch.description, locale)}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link
+            href={getLocalizedPath("/branches", locale)}
+            className="inline-flex items-center text-[#701621] font-bold hover:underline"
+          >
+            {t("common.viewAll") || "View All Tracks"} →
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   const t = useTranslations();
@@ -60,6 +141,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Tracks Section (New) */}
+      <TracksSection />
 
       {/* Footer */}
       <footer className="bg-[#0f1b4b] text-white py-8 mt-20">
