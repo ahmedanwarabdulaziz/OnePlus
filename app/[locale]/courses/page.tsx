@@ -110,6 +110,7 @@ export default function CoursesPage() {
                                                 alt={title}
                                                 fill
                                                 className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                                unoptimized
                                             />
                                         ) : (
                                             <div className="w-full h-full bg-gradient-to-br from-[#0f1b4b] to-[#1e2d6f] flex items-center justify-center p-6 text-center">

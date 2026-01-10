@@ -69,6 +69,7 @@ export default function BranchesPage() {
                                                 alt={getText(branch.name, locale)}
                                                 fill
                                                 className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                                unoptimized
                                             />
                                         ) : (
                                             <div
@@ -89,6 +90,7 @@ export default function BranchesPage() {
                                                         alt="icon"
                                                         fill
                                                         className="object-contain"
+                                                        unoptimized
                                                     />
                                                 </div>
                                             </div>

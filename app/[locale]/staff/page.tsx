@@ -127,6 +127,7 @@ export default function StaffPage() {
                         alt={`${firstName} ${lastName}`}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        unoptimized
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#0f1b4b]/10 to-[#701621]/10">

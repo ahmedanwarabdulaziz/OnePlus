@@ -99,6 +99,7 @@ export default function BranchDetailPage() {
                             alt={getText(branch.name, locale)}
                             fill
                             className="object-cover opacity-20"
+                            unoptimized
                         />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-r from-[#0f1b4b] via-[#0f1b4b]/90 to-transparent" />
@@ -117,7 +118,7 @@ export default function BranchDetailPage() {
                             {branch.icon && (
                                 <div className="w-16 h-16 bg-white/10 backdrop-blur rounded-xl p-3 border border-white/20">
                                     <div className="relative w-full h-full">
-                                        <Image src={branch.icon} alt="icon" fill className="object-contain" />
+                                        <Image src={branch.icon} alt="icon" fill className="object-contain" unoptimized />
                                     </div>
                                 </div>
                             )}
@@ -165,6 +166,7 @@ export default function BranchDetailPage() {
                                             alt={getText(course.title, locale)}
                                             fill
                                             className="object-cover group-hover:scale-105 transition-transform duration-500"
+                                            unoptimized
                                         />
                                     ) : (
                                         <div className="w-full h-full flex items-center justify-center bg-[#0f1b4b]/5">

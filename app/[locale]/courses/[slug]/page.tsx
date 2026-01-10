@@ -100,6 +100,7 @@ export default function CourseDetailPage() {
                         fill
                         className="object-cover opacity-50"
                         priority
+                        unoptimized
                     />
                 ) : (
                     <div className="absolute inset-0 bg-gradient-to-r from-[#0f1b4b] to-[#701621] opacity-90" />
