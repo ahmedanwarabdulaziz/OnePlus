@@ -15,6 +15,22 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "*.netlify.app",
+      },
+      {
+        protocol: "https",
+        hostname: "*.vercel.app",
+      },
+      {
+        protocol: "https",
+        hostname: "oneplustraining.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.oneplustraining.com",
+      },
+      {
+        protocol: "https",
         hostname: "*.r2.cloudflarestorage.com",
       },
       {
