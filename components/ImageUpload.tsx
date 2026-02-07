@@ -65,8 +65,8 @@ export default function ImageUpload({
       const data = await response.json();
 
       if (response.ok) {
-        // Use presignedUrl if available (for immediate access), otherwise use url or key
-        const imageUrl = data.presignedUrl || data.url || data.key;
+        // Use key (permanent) instead of presignedUrl (expires after 7 days)
+        const imageUrl = data.key || data.url;
         console.log("Upload response:", {
           presignedUrl: !!data.presignedUrl,
           url: !!data.url,
@@ -111,7 +111,11 @@ export default function ImageUpload({
             {value ? (
               <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                 <Image
-                  src={value}
+                  src={
+                    value.startsWith('http')
+                      ? value
+                      : `/api/images/${value}`
+                  }
                   alt={label}
                   fill
                   style={{ objectFit: 'cover' }}

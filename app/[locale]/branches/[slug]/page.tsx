@@ -95,7 +95,11 @@ export default function BranchDetailPage() {
                 <div className="absolute inset-0">
                     {branch.image && (
                         <Image
-                            src={branch.image}
+                            src={
+                                branch.image.startsWith('http')
+                                    ? branch.image
+                                    : `/api/images/${branch.image}`
+                            }
                             alt={getText(branch.name, locale)}
                             fill
                             className="object-cover opacity-20"
@@ -118,7 +122,17 @@ export default function BranchDetailPage() {
                             {branch.icon && (
                                 <div className="w-16 h-16 bg-white/10 backdrop-blur rounded-xl p-3 border border-white/20">
                                     <div className="relative w-full h-full">
-                                        <Image src={branch.icon} alt="icon" fill className="object-contain" unoptimized />
+                                        <Image
+                                            src={
+                                                branch.icon.startsWith('http')
+                                                    ? branch.icon
+                                                    : `/api/images/${branch.icon}`
+                                            }
+                                            alt="icon"
+                                            fill
+                                            className="object-contain"
+                                            unoptimized
+                                        />
                                     </div>
                                 </div>
                             )}
@@ -162,7 +176,11 @@ export default function BranchDetailPage() {
                                 <div className="aspect-video bg-gray-100 relative overflow-hidden">
                                     {course.images?.thumbnail ? (
                                         <Image
-                                            src={course.images.thumbnail}
+                                            src={
+                                                course.images.thumbnail.startsWith('http')
+                                                    ? course.images.thumbnail
+                                                    : `/api/images/${course.images.thumbnail}`
+                                            }
                                             alt={getText(course.title, locale)}
                                             fill
                                             className="object-cover group-hover:scale-105 transition-transform duration-500"

@@ -161,7 +161,11 @@ export default function StaffDetailPage() {
               <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-6">
                 {staff.images?.square ? (
                   <Image
-                    src={staff.images.square}
+                    src={
+                      staff.images.square.startsWith('http')
+                        ? staff.images.square
+                        : `/api/images/${staff.images.square}`
+                    }
                     alt={`${firstName} ${lastName}`}
                     width={400}
                     height={400}

@@ -51,6 +51,7 @@ import BilingualArrayTable from "@/components/BilingualArrayTable";
 import CourseLevelEditor from "@/components/CourseLevelEditor";
 import SortableCourseRow from "@/components/SortableCourseRow";
 import ImageUpload from "@/components/ImageUpload";
+import CategorySelector from "@/components/CategorySelector";
 
 export default function CoursesPage() {
     const [courses, setCourses] = useState<Course[]>([]);
@@ -436,11 +437,10 @@ export default function CoursesPage() {
                                     </FormControl>
                                 </Grid>
                                 <Grid item xs={12} md={6}>
-                                    <BilingualArrayTable
+                                    <CategorySelector
                                         label="Categories"
-                                        items={formData.category}
+                                        value={formData.category}
                                         onChange={(category) => setFormData({ ...formData, category })}
-                                        placeholder="e.g. Soft Skills"
                                     />
                                 </Grid>
                                 <Grid item xs={12} md={6} display="flex" alignItems="center">

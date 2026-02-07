@@ -123,7 +123,11 @@ export default function StaffPage() {
                   <div className="aspect-square bg-gray-100 relative overflow-hidden">
                     {member.images?.square ? (
                       <Image
-                        src={member.images.square}
+                        src={
+                          member.images.square.startsWith('http')
+                            ? member.images.square
+                            : `/api/images/${member.images.square}`
+                        }
                         alt={`${firstName} ${lastName}`}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"

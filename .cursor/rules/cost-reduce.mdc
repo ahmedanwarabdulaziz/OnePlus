@@ -1,0 +1,8 @@
+---
+name: cost-reduce
+description: Prefer minimal explanations. Only describe changes in 2–3 short bullet points. Do not generate README files or long summaries unless explicitly asked
+---
+
+# Overview
+
+Insert overview text here. The agent will only see this should they choose to apply the rule.

@@ -39,13 +39,19 @@ export async function PUT(
 
         const docRef = adminDb.collection(COLLECTION_NAME).doc(params.id);
 
-        await docRef.update({
+        // Clean up the data - remove undefined values and ensure proper types
+        const updateData: any = {
             ...data,
+            image: data.image || "",
+            icon: data.icon || "",
             updatedAt: Timestamp.now(),
-        });
+        };
+
+        await docRef.update(updateData);
 
         return NextResponse.json({ success: true });
     } catch (error: any) {
+        console.error("Error updating branch:", error);
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

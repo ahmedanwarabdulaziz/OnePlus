@@ -95,7 +95,11 @@ export default function CourseDetailPage() {
             <div className="relative h-[300px] md:h-[400px] lg:h-[500px] w-full bg-[#0f1b4b]">
                 {course.images?.hero ? (
                     <Image
-                        src={course.images.hero}
+                        src={
+                            course.images.hero.startsWith('http')
+                                ? course.images.hero
+                                : `/api/images/${course.images.hero}`
+                        }
                         alt={getText(course.title, locale)}
                         fill
                         className="object-cover opacity-50"

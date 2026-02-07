@@ -8,17 +8,35 @@ const COLLECTION_NAME = "branches";
 // GET /api/admin/branches - List all branches
 export async function GET(request: NextRequest) {
     try {
-        const snapshot = await adminDb.collection(COLLECTION_NAME).orderBy("displayOrder", "asc").get();
-        const branches = snapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data(),
-            // Convert Timestamps to Strings/Dates if needed, for now keep simple or convert to Date
-            createdAt: doc.data().createdAt?.toDate(),
-            updatedAt: doc.data().updatedAt?.toDate(),
-        }));
+        console.log("Fetching branches...");
+
+        // Don't use orderBy if not all documents have displayOrder field
+        // Instead, fetch all and sort in-memory
+        const snapshot = await adminDb.collection(COLLECTION_NAME).get();
+
+        console.log(`Found ${snapshot.docs.length} branches in database`);
+
+        const branches = snapshot.docs.map(doc => {
+            const data = doc.data();
+            return {
+                id: doc.id,
+                ...data,
+                // Convert Timestamps to Strings/Dates if needed, for now keep simple or convert to Date
+                createdAt: data.createdAt?.toDate?.() || data.createdAt,
+                updatedAt: data.updatedAt?.toDate?.() || data.updatedAt,
+                // Ensure displayOrder exists
+                displayOrder: data.displayOrder !== undefined ? data.displayOrder : 0,
+            };
+        }) as any[];
+
+        // Sort by displayOrder in-memory
+        branches.sort((a, b) => (a.displayOrder || 0) - (b.displayOrder || 0));
+
+        console.log("Returning branches:", branches.length, "total");
 
         return NextResponse.json({ success: true, branches });
     } catch (error: any) {
+        console.error("Error fetching branches:", error);
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

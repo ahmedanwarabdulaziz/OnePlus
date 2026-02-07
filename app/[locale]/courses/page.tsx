@@ -106,7 +106,11 @@ export default function CoursesPage() {
                                     <div className="relative h-48 w-full overflow-hidden">
                                         {course.images?.thumbnail ? (
                                             <Image
-                                                src={course.images.thumbnail}
+                                                src={
+                                                    course.images.thumbnail.startsWith('http')
+                                                        ? course.images.thumbnail
+                                                        : `/api/images/${course.images.thumbnail}`
+                                                }
                                                 alt={title}
                                                 fill
                                                 className="object-cover group-hover:scale-105 transition-transform duration-500"

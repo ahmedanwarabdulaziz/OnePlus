@@ -1,0 +1,4 @@
+
+- Refactor functions by outputting only the updated code, no explanations.
+- Make the requested changes and give at most 3 short bullet points describing them, no extra commentary.
+- Do not create or update README or documentation unless I ask.
