@@ -1,4 +1,10 @@
 {
+  "courses": {
+    "title": "Our Courses",
+    "subtitle": "Explore our wide range of professional courses designed to elevate your skills.",
+    "noCourses": "No courses available",
+    "viewDetails": "View Details"
+  },
   "common": {
     "welcome": "Welcome",
     "login": "Login",
@@ -10,23 +16,7 @@
     "staff": "Staff",
     "readMore": "Read More",
     "learnMore": "Learn More",
-    "loading": "Loading..."
-  },
-  "home": {
-    "title": "Professional Training & Development Programs",
-    "subtitle": "Empowering individuals and organizations through comprehensive training programs and expert consultations",
-    "explorePrograms": "Explore Our Programs",
-    "whatWeOffer": "What We Offer",
-    "trainingPrograms": "Training Programs",
-    "trainingProgramsDesc": "Comprehensive courses designed to enhance skills and knowledge",
-    "developmentWorkshops": "Development Workshops",
-    "developmentWorkshopsDesc": "Interactive workshops for professional and personal growth",
-    "expertConsultations": "Expert Consultations",
-    "expertConsultationsDesc": "One-on-one consultations with industry experts"
-  },
-  "courses": {
-    "title": "Our Courses",
-    "noCourses": "No courses available",
+    "loading": "Loading...",
     "viewDetails": "View Details"
   },
   "branches": {

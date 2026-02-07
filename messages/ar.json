@@ -1,4 +1,10 @@
 {
+  "courses": {
+    "title": "دوراتنا",
+    "subtitle": "اكتشف مجموعتنا الواسعة من الدورات الاحترافية المصممة لتطوير مهاراتك.",
+    "noCourses": "لا توجد دورات متاحة",
+    "viewDetails": "عرض التفاصيل"
+  },
   "common": {
     "welcome": "مرحباً",
     "login": "تسجيل الدخول",
@@ -10,23 +16,7 @@
     "staff": "الفريق",
     "readMore": "اقرأ المزيد",
     "learnMore": "اعرف المزيد",
-    "loading": "جاري التحميل..."
-  },
-  "home": {
-    "title": "برامج التدريب والتطوير المهنية",
-    "subtitle": "تمكين الأفراد والمنظمات من خلال برامج التدريب الشاملة والاستشارات المتخصصة",
-    "explorePrograms": "استكشف برامجنا",
-    "whatWeOffer": "ما نقدمه",
-    "trainingPrograms": "برامج التدريب",
-    "trainingProgramsDesc": "دورات شاملة مصممة لتعزيز المهارات والمعرفة",
-    "developmentWorkshops": "ورش التطوير",
-    "developmentWorkshopsDesc": "ورش تفاعلية للنمو المهني والشخصي",
-    "expertConsultations": "الاستشارات المتخصصة",
-    "expertConsultationsDesc": "استشارات فردية مع خبراء الصناعة"
-  },
-  "courses": {
-    "title": "دوراتنا",
-    "noCourses": "لا توجد دورات متاحة",
+    "loading": "جاري التحميل...",
     "viewDetails": "عرض التفاصيل"
   },
   "branches": {
