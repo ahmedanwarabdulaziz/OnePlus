@@ -9,6 +9,7 @@ import { Course } from "@/types/courses";
 import { useLocale } from "@/hooks/useLocale";
 import { getText } from "@/types/translations";
 import { getLocalizedPath } from "@/lib/localized-path";
+import Footer from "@/components/Footer";
 
 export default function CoursesPage() {
     const t = useTranslations();
@@ -166,13 +167,7 @@ export default function CoursesPage() {
                 )}
             </main>
 
-            <footer className="bg-[#0f1b4b] text-white py-8 mt-20">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <p className="text-center text-gray-300">
-                        © 2024 One Plus Training & Development. All rights reserved.
-                    </p>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 }

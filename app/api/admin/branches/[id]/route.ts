@@ -44,6 +44,7 @@ export async function PUT(
             ...data,
             image: data.image || "",
             icon: data.icon || "",
+            isFeatured: data.isFeatured === true,
             updatedAt: Timestamp.now(),
         };
 

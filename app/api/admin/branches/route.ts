@@ -65,8 +65,9 @@ export async function POST(request: NextRequest) {
             id: docRef.id,
             createdAt: now,
             updatedAt: now,
-            displayOrder: data.displayOrder || 0, // Default to 0
-            isActive: data.isActive !== undefined ? data.isActive : true, // Default true
+            displayOrder: data.displayOrder ?? 0,
+            isActive: data.isActive !== undefined ? data.isActive : true,
+            isFeatured: data.isFeatured === true,
         };
 
         await docRef.set(newBranch);

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "content-inventory": "node scripts/generate-content-inventory.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.540.0",

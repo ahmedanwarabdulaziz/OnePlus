@@ -9,6 +9,7 @@ import { StaffMember } from "@/types/staff";
 import { getText } from "@/types/translations";
 import { getLocalizedPath } from "@/lib/localized-path";
 import { useLocale } from "@/hooks/useLocale";
+import Footer from "@/components/Footer";
 
 export default function StaffPage() {
   const t = useTranslations();
@@ -172,13 +173,7 @@ export default function StaffPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-[#0f1b4b] text-white py-8 mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-gray-300">
-            © 2024 One Plus Training & Development. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

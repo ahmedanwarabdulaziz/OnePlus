@@ -1,0 +1,151 @@
+ONE PLUS TRAINING & DEVELOPMENT – CONTENT INVENTORY
+====================================================
+This file lists user-facing content by URL and headline. Generated from messages (en, ar).
+Dynamic pages (e.g. /courses/[slug], /branches/[slug], /staff/[slug]) show content from the database; only list-page content is below.
+
+Last generated: 2026-02-16T11:11:16.205Z
+To regenerate: npm run content-inventory
+
+---
+
+URL: / (English)
+Headline: One Plus Training & Development
+  - title: One Plus Training & Development
+  - subtitle: Empowering individuals and organizations through professional training, workshops, and expert consultations.
+  - explorePrograms: Explore Programs
+  - whatWeOffer: What We Offer
+  - trainingPrograms: Training Programs
+  - trainingProgramsDesc: Structured programs designed to build skills and advance your career.
+  - developmentWorkshops: Development Workshops
+  - developmentWorkshopsDesc: Hands-on workshops for practical learning and immediate application.
+  - expertConsultations: Expert Consultations
+  - expertConsultationsDesc: One-on-one guidance from industry experts to achieve your goals.
+
+URL: /ar (Arabic)
+Headline: وان بلس للتدريب والتطوير
+  - title: وان بلس للتدريب والتطوير
+  - subtitle: تمكين الأفراد والمؤسسات من خلال التدريب الاحترافي وورش العمل والاستشارات المتخصصة.
+  - explorePrograms: استكشف البرامج
+  - whatWeOffer: ما نقدمه
+  - trainingPrograms: برامج تدريبية
+  - trainingProgramsDesc: برامج منظمة مصممة لبناء المهارات والتقدم في مسيرتك المهنية.
+  - developmentWorkshops: ورش التطوير
+  - developmentWorkshopsDesc: ورش عملية للتطبيق الفوري والتعلم العملي.
+  - expertConsultations: استشارات خبراء
+  - expertConsultationsDesc: إرشاد فردي من خبراء المجال لتحقيق أهدافك.
+
+URL: /courses (English)
+Headline: Our Courses
+  - title: Our Courses
+  - subtitle: Explore our wide range of professional courses designed to elevate your skills.
+  - noCourses: No courses available
+  - viewDetails: View Details
+
+URL: /ar/courses (Arabic)
+Headline: دوراتنا
+  - title: دوراتنا
+  - subtitle: اكتشف مجموعتنا الواسعة من الدورات الاحترافية المصممة لتطوير مهاراتك.
+  - noCourses: لا توجد دورات متاحة
+  - viewDetails: عرض التفاصيل
+
+URL: /branches (English)
+Headline: Our Tracks
+  - title: Our Tracks
+  - subtitle: Explore our specialized training paths designed to help you master specific skills and advance your career.
+  - homeSubtitle: Choose your path to success with our focused training tracks.
+  - backToTracks: Back to Tracks
+  - noBranches: No training tracks found.
+
+URL: /ar/branches (Arabic)
+Headline: المسارات التدريبية
+  - title: المسارات التدريبية
+  - subtitle: استكشف مساراتنا التدريبية المتخصصة المصممة لمساعدتك على إتقان مهارات محددة والتقدم في مسيرتك المهنية.
+  - homeSubtitle: اختر طريقك نحو النجاح مع مساراتنا التدريبية المركزة.
+  - backToTracks: العودة إلى المسارات
+  - noBranches: لا توجد مسارات تدريبية حالياً.
+
+URL: /staff (English)
+Headline: Our Team
+  - title: Our Team
+  - subtitle: Meet our exceptional team of experts and professionals
+  - coaches: Coaches
+  - employees: Employees
+  - all: All
+  - viewProfile: View Profile
+  - noStaff: No staff members available at the moment
+  - notFound: Staff member not found
+  - backToStaff: ← Back to Staff
+  - phone: Phone
+  - email: Email
+  - website: Website
+  - biography: Biography
+  - experience: Experience
+  - specialties: Specialties
+  - certifications: Certifications
+  - education: Education
+  - achievements: Achievements
+  - areasOfExpertise: Areas of Expertise
+  - languages: Languages
+
+URL: /ar/staff (Arabic)
+Headline: فريقنا
+  - title: فريقنا
+  - subtitle: تعرف على فريقنا المتميز من الخبراء والمحترفين
+  - coaches: المدربون
+  - employees: الموظفون
+  - all: الكل
+  - viewProfile: عرض الملف الشخصي
+  - noStaff: لا يوجد أعضاء فريق متاحين حالياً
+  - notFound: عضو الفريق غير موجود
+  - backToStaff: ← العودة إلى الفريق
+  - phone: الهاتف
+  - email: البريد الإلكتروني
+  - website: الموقع
+  - biography: نبذة
+  - experience: الخبرة
+  - specialties: التخصصات
+  - certifications: الشهادات
+  - education: التعليم
+  - achievements: الإنجازات
+  - areasOfExpertise: مجالات الخبرة
+  - languages: اللغات
+
+---
+COMMON (navigation / shared labels)
+Used across pages. Keys: welcome, login, logout, home, about, contact, courses, staff, readMore, learnMore, loading, viewDetails
+
+Locale: en
+  common.welcome: Welcome
+  common.login: Login
+  common.logout: Logout
+  common.home: Home
+  common.about: About
+  common.contact: Contact
+  common.courses: Courses
+  common.staff: Staff
+  common.readMore: Read More
+  common.learnMore: Learn More
+  common.loading: Loading...
+  common.viewDetails: View Details
+
+Locale: ar
+  common.welcome: مرحباً
+  common.login: تسجيل الدخول
+  common.logout: تسجيل الخروج
+  common.home: الرئيسية
+  common.about: من نحن
+  common.contact: اتصل بنا
+  common.courses: الدورات
+  common.staff: الفريق
+  common.readMore: اقرأ المزيد
+  common.learnMore: اعرف المزيد
+  common.loading: جاري التحميل...
+  common.viewDetails: عرض التفاصيل
+
+---
+DYNAMIC PAGES (content from database)
+/courses/[slug]  – Course detail (title, description, etc. from Firestore)
+/branches/[slug] – Branch/track detail (name, description, etc. from Firestore)
+/staff/[slug]    – Staff profile (name, bio, etc. from Firestore)
+
+Other URLs: /login (login page), /admin/* (admin only).

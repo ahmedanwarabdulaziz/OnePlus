@@ -80,6 +80,15 @@ export default function Header() {
               {t("common.home")}
             </Link>
             <Link
+              href={getLocalizedPath("/about", locale)}
+              className={`transition-colors ${pathname?.includes("/about")
+                ? "text-[#0f1b4b] font-semibold"
+                : "text-gray-700 hover:text-[#0f1b4b]"
+                }`}
+            >
+              {t("common.about")}
+            </Link>
+            <Link
               href={getLocalizedPath("/courses", locale)}
               className={`transition-colors ${pathname?.includes("/courses")
                 ? "text-[#0f1b4b] font-semibold"
@@ -96,6 +105,15 @@ export default function Header() {
                 }`}
             >
               {t("branches.title") || "Tracks"}
+            </Link>
+            <Link
+              href={getLocalizedPath("/contact", locale)}
+              className={`transition-colors ${pathname?.includes("/contact")
+                ? "text-[#0f1b4b] font-semibold"
+                : "text-gray-700 hover:text-[#0f1b4b]"
+                }`}
+            >
+              {t("common.contact")}
             </Link>
             <div
               className="relative"

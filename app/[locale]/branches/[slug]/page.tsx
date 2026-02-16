@@ -10,6 +10,7 @@ import { Branch } from "@/types/branches";
 import { Course } from "@/types/courses";
 import { getText } from "@/types/translations";
 import { getLocalizedPath } from "@/lib/localized-path";
+import Footer from "@/components/Footer";
 import { useLocale } from "@/hooks/useLocale";
 
 export default function BranchDetailPage() {
@@ -230,13 +231,7 @@ export default function BranchDetailPage() {
                 )}
             </main>
 
-            <footer className="bg-[#0f1b4b] text-white py-8 mt-auto">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <p className="text-center text-gray-300">
-                        © 2024 One Plus Training & Development. All rights reserved.
-                    </p>
-                </div>
-            </footer>
+            <Footer />
         </div>
     );
 }

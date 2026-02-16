@@ -16,16 +16,20 @@ export async function GET(request: NextRequest) {
 
         const snapshot = await query.get();
         const branches = snapshot.docs
-            .map(doc => ({
-                id: doc.id,
-                ...doc.data(),
-                createdAt: doc.data().createdAt?.toDate(),
-                updatedAt: doc.data().updatedAt?.toDate(),
-            }))
+            .map(doc => {
+                const d = doc.data();
+                return {
+                    id: doc.id,
+                    ...d,
+                    isFeatured: d.isFeatured === true,
+                    createdAt: d.createdAt?.toDate?.(), updatedAt: d.updatedAt?.toDate?.(),
+                };
+            })
             .sort((a: any, b: any) => (a.displayOrder || 0) - (b.displayOrder || 0));
 
         return NextResponse.json({ success: true, branches });
     } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        console.error("[api/branches]", error?.message || error);
+        return NextResponse.json({ success: true, branches: [] });
     }
 }
